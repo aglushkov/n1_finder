@@ -63,3 +63,19 @@ N+1 QUERY DETECTED:
     SELECT  "comments".* FROM "comments" WHERE "comments"."user_id" = $1, user_id = 618
     SELECT  "comments".* FROM "comments" WHERE "comments"."user_id" = $1, user_id = 947
 ```
+
+## Running tests
+- Copy `spec/.env.example` file to `spec/.env` and set database credentials.
+```bash
+cp spec/.env.example spec/.env
+```
+
+- Load this variables into your system.
+```bash
+source spec/.env
+```
+
+- Run tests.
+```bash
+rspec
+```
