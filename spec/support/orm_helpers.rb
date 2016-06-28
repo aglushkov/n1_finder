@@ -1,8 +1,4 @@
-require 'yaml'
-
 module ORMHelpers
-  SECRETS = YAML.load(File.open('spec/secrets.yml'))
-
   DB_PARAMS = {
     active_record: {
       sqlite: {
@@ -12,16 +8,16 @@ module ORMHelpers
       pg: {
         adapter: 'postgresql',
         host: 'localhost',
-        username: SECRETS[:pg][:username].to_s,
-        password: SECRETS[:pg][:password].to_s,
-        database: SECRETS[:pg][:database].to_s
+        username: ENV['PG_USERNAME'].to_s,
+        password: ENV['PG_PASSWORD'].to_s,
+        database: ENV['PG_DATABASE'].to_s
       },
       mysql: {
         adapter: 'mysql',
         host: 'localhost',
-        username: SECRETS[:mysql][:username].to_s,
-        password: SECRETS[:mysql][:password].to_s,
-        database: SECRETS[:mysql][:database].to_s
+        username: ENV['MYSQL_USERNAME'].to_s,
+        password: ENV['MYSQL_PASSWORD'].to_s,
+        database: ENV['MYSQL_DATABASE'].to_s
       }
     },
     sequel: {
@@ -32,16 +28,16 @@ module ORMHelpers
       pg: {
         adapter: 'postgres',
         host: 'localhost',
-        username: SECRETS[:pg][:username].to_s,
-        password: SECRETS[:pg][:password].to_s,
-        database: SECRETS[:pg][:database].to_s
+        username: ENV['PG_USERNAME'].to_s,
+        password: ENV['PG_PASSWORD'].to_s,
+        database: ENV['PG_DATABASE'].to_s
       },
       mysql: {
         adapter: 'mysql',
         host: 'localhost',
-        username: SECRETS[:mysql][:username].to_s,
-        password: SECRETS[:mysql][:password].to_s,
-        database: SECRETS[:mysql][:database].to_s
+        username: ENV['MYSQL_USERNAME'].to_s,
+        password: ENV['MYSQL_PASSWORD'].to_s,
+        database: ENV['MYSQL_DATABASE'].to_s
       }
     }
   }.freeze
