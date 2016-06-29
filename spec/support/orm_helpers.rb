@@ -1,54 +1,40 @@
+# rubocop:disable Metrics/LineLength
+
 module ORMHelpers
-  DB_PARAMS = {
-    active_record: {
-      sqlite: {
-        adapter: 'sqlite3',
-        database: ':memory:'
+  DB_PARAMS = Hash.new { |hash, _key| hash['mri'] }.update(
+    'mri' => {
+      active_record: {
+        sqlite: 'sqlite3::memory:',
+        pg: "postgres://#{ENV['PG_USERNAME']}:#{ENV['PG_PASSWORD']}@localhost/#{ENV['PG_DATABASE']}",
+        mysql: "mysql://#{ENV['MYSQL_USERNAME']}:#{ENV['MYSQL_PASSWORD']}@localhost/#{ENV['MYSQL_DATABASE']}"
       },
-      pg: {
-        adapter: 'postgresql',
-        host: 'localhost',
-        username: ENV['PG_USERNAME'].to_s,
-        password: ENV['PG_PASSWORD'].to_s,
-        database: ENV['PG_DATABASE'].to_s
-      },
-      mysql: {
-        adapter: 'mysql',
-        host: 'localhost',
-        username: ENV['MYSQL_USERNAME'].to_s,
-        password: ENV['MYSQL_PASSWORD'].to_s,
-        database: ENV['MYSQL_DATABASE'].to_s
+      sequel: {
+        sqlite: 'sqlite::memory:',
+        pg: "postgres://#{ENV['PG_USERNAME']}:#{ENV['PG_PASSWORD']}@localhost/#{ENV['PG_DATABASE']}",
+        mysql: "mysql://#{ENV['MYSQL_USERNAME']}:#{ENV['MYSQL_PASSWORD']}@localhost/#{ENV['MYSQL_DATABASE']}"
       }
     },
-    sequel: {
-      sqlite: {
-        adapter: 'sqlite',
-        database: ':memory:'
+    'java' => {
+      active_record: {
+        sqlite: 'sqlite3::memory:',
+        pg: "postgresql://#{ENV['PG_USERNAME']}:#{ENV['PG_PASSWORD']}@localhost/#{ENV['PG_DATABASE']}",
+        mysql: "mysql://#{ENV['MYSQL_USERNAME']}:#{ENV['MYSQL_PASSWORD']}@localhost/#{ENV['MYSQL_DATABASE']}"
       },
-      pg: {
-        adapter: 'postgres',
-        host: 'localhost',
-        username: ENV['PG_USERNAME'].to_s,
-        password: ENV['PG_PASSWORD'].to_s,
-        database: ENV['PG_DATABASE'].to_s
-      },
-      mysql: {
-        adapter: 'mysql',
-        host: 'localhost',
-        username: ENV['MYSQL_USERNAME'].to_s,
-        password: ENV['MYSQL_PASSWORD'].to_s,
-        database: ENV['MYSQL_DATABASE'].to_s
+      sequel: {
+        sqlite: 'jdbc:sqlite::memory:',
+        pg: "jdbc:postgresql://localhost/#{ENV['PG_DATABASE']}?user=#{ENV['PG_USERNAME']}&password=#{ENV['PG_PASSWORD']}",
+        mysql: "jdbc:mysql://localhost/#{ENV['MYSQL_DATABASE']}?user=#{ENV['MYSQL_USERNAME']}&password=#{ENV['MYSQL_PASSWORD']}"
       }
     }
-  }.freeze
+  )
 
   def connect_sequel(adapter)
-    Sequel::Model.db = Sequel.connect(DB_PARAMS[:sequel][adapter])
+    Sequel::Model.db = Sequel.connect(DB_PARAMS[RUBY_PLATFORM][:sequel][adapter])
     TestSequelMigration.up
   end
 
   def connect_active_record(adapter)
-    ActiveRecord::Base.establish_connection(DB_PARAMS[:active_record][adapter])
+    ActiveRecord::Base.establish_connection(DB_PARAMS[RUBY_PLATFORM][:active_record][adapter])
     silence_stream(STDOUT) { TestActiveRecordMigration.up }
   end
 

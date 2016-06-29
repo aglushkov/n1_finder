@@ -1,4 +1,4 @@
-require 'pry-nav'
+require 'pry-nav' if RUBY_PLATFORM != 'java'
 require 'bundler/setup'
 Bundler.setup
 
