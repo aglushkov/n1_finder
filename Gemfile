@@ -9,7 +9,7 @@ gem 'sequel', '~> 4.35'
 platforms :ruby do
   gem 'sqlite3'
   gem 'pg'
-  gem 'mysql'
+  gem 'mysql2'
   gem 'pry'
   gem 'pry-nav', '~> 0.2.4'
 end

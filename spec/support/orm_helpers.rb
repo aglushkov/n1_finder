@@ -6,19 +6,19 @@ module ORMHelpers
       active_record: {
         sqlite: 'sqlite3::memory:',
         pg: "postgres://#{ENV['PG_USERNAME']}:#{ENV['PG_PASSWORD']}@localhost/#{ENV['PG_DATABASE']}",
-        mysql: "mysql://#{ENV['MYSQL_USERNAME']}:#{ENV['MYSQL_PASSWORD']}@localhost/#{ENV['MYSQL_DATABASE']}"
+        mysql: "mysql2://#{ENV['MYSQL_USERNAME']}:#{ENV['MYSQL_PASSWORD']}@localhost/#{ENV['MYSQL_DATABASE']}"
       },
       sequel: {
         sqlite: 'sqlite::memory:',
         pg: "postgres://#{ENV['PG_USERNAME']}:#{ENV['PG_PASSWORD']}@localhost/#{ENV['PG_DATABASE']}",
-        mysql: "mysql://#{ENV['MYSQL_USERNAME']}:#{ENV['MYSQL_PASSWORD']}@localhost/#{ENV['MYSQL_DATABASE']}"
+        mysql: "mysql2://#{ENV['MYSQL_USERNAME']}:#{ENV['MYSQL_PASSWORD']}@localhost/#{ENV['MYSQL_DATABASE']}"
       }
     },
     'java' => {
       active_record: {
         sqlite: 'sqlite3::memory:',
         pg: "postgresql://#{ENV['PG_USERNAME']}:#{ENV['PG_PASSWORD']}@localhost/#{ENV['PG_DATABASE']}",
-        mysql: "mysql://#{ENV['MYSQL_USERNAME']}:#{ENV['MYSQL_PASSWORD']}@localhost/#{ENV['MYSQL_DATABASE']}"
+        mysql: "mysql2://#{ENV['MYSQL_USERNAME']}:#{ENV['MYSQL_PASSWORD']}@localhost/#{ENV['MYSQL_DATABASE']}"
       },
       sequel: {
         sqlite: 'jdbc:sqlite::memory:',
