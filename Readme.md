@@ -12,27 +12,6 @@
 ## Installation
   `gem 'n_1_finder', group: :development`
 
-## Configuration
-### Logger
-Default is `Logger.new(STDOUT)`
-
-Logger can be any instance of `Logger` class.
-
-```ruby
-  N1Finder.logger = Logger.new('log/n1.log')
-```
-
-### ORM
-Default is `:active_record` if you have activerecord gem installed.
-
-Default is `:sequel` if you have sequel gem installed.
-
-Allowed values are `:active_record` and `:sequel`
-
-```ruby
-  N1Finder.orm = :active_record
-```
-
 ## Using
 Include middleware to your Rack app:
 ```ruby
@@ -66,6 +45,27 @@ N+1 QUERY DETECTED:
   ORIGINAL_QUERIES:
     SELECT  "comments".* FROM "comments" WHERE "comments"."user_id" = $1, user_id = 618
     SELECT  "comments".* FROM "comments" WHERE "comments"."user_id" = $1, user_id = 947
+```
+
+## Configuration
+### Logger
+Default is `Logger.new(STDOUT)`
+
+Logger can be any instance of `Logger` class.
+
+```ruby
+  N1Finder.logger = Logger.new('log/n1.log')
+```
+
+### ORM
+Default is `:active_record` if you have activerecord gem installed.
+
+Default is `:sequel` if you have sequel gem installed.
+
+Allowed values are `:active_record` and `:sequel`
+
+```ruby
+  N1Finder.orm = :active_record
 ```
 
 ## Running tests
