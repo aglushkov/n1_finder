@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gemspec
 
+gem 'rake'
 gem 'activerecord', '~> 4.2'
 gem 'sequel', '~> 4.35'
 
