@@ -1,0 +1,26 @@
+language: ruby
+
+rvm:
+  - 2.1
+  - 2.2
+  - ruby-head
+  - jruby-9.0.1.0
+
+gemfile:
+  - Gemfile
+
+services:
+  - mysql
+  - postgresql
+
+before_script:
+  - export MYSQL_USERNAME=travis
+  - export MYSQL_PASSWORD=
+  - export MYSQL_DATABASE=n1_finder_test
+
+  - export PG_USERNAME=postgres
+  - export PG_PASSWORD=
+  - export PG_DATABASE=n1_finder_test
+
+  - mysql -e 'CREATE DATABASE n1_finder_test;'
+  - psql -c 'CREATE DATABASE n1_finder_test;' -U postgres
