@@ -3,7 +3,6 @@ require './lib/n_1_finder/version'
 Gem::Specification.new do |s|
   s.name        = 'n_1_finder'
   s.version     = N1Finder::VERSION
-  s.date        = '2016-05-06'
   s.summary     = 'N+1 Finder'
   s.description = 'Finds N+1 queries'
   s.authors     = ['Andrey Glushkov']
