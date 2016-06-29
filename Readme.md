@@ -1,4 +1,8 @@
 # N+1 Finder
+  [![Gem Version](https://badge.fury.io/rb/n_1_finder.svg)](https://badge.fury.io/rb/n_1_finder)
+  [![Build Status](https://api.travis-ci.org/aglushkov/n1_finder.svg?branch=master)](https://travis-ci.org/aglushkov/n1_finder)
+  [![Inline docs](http://inch-ci.org/github/aglushkov/n1_finder.svg?branch=master)](http://inch-ci.org/github/aglushkov/n1_finder)
+
   This gem helps to find N+1 queries.
 
   It works with `ActiveRecord` and `Sequel`.
