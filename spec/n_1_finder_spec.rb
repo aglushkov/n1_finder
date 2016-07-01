@@ -42,7 +42,7 @@ RSpec.describe N1Finder do
     context 'when logger is not a Logger' do
       let(:logger) { nil }
       it 'raises error' do
-        expect { subject }.to raise_error described_class::InvalidLogger
+        expect { subject }.to raise_error described_class::Errors::InvalidLogger
       end
     end
   end
@@ -60,7 +60,7 @@ RSpec.describe N1Finder do
     context 'when orm is not supported' do
       let(:orm) { :mongo }
       it 'raises error' do
-        expect { subject }.to raise_error N1Finder::InvalidORM
+        expect { subject }.to raise_error described_class::Errors::InvalidORM
       end
     end
   end
