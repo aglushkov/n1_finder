@@ -12,10 +12,10 @@ class N1Finder
     #
     # @return [void] result of block call
     def find
-      storage = N1Finder::Storage.new
+      storage = Storage.new
       result = catch_queries(storage) { yield }
-      n1_queries = N1Finder::N1Query.generate_by(storage.queries)
-      N1Finder::Logger.new.log(n1_queries)
+      n1_queries = N1Query.generate_by(storage.queries)
+      Logger.new.log(n1_queries)
 
       result
     end
@@ -50,12 +50,11 @@ class N1Finder
     #
     # @return [Symbol, nil]
     def orm
-      @orm ||=
-        if defined?(ActiveRecord)
-          :active_record
-        elsif defined?(Sequel)
-          :sequel
-        end
+      @orm ||= if defined?(ActiveRecord)
+        :active_record
+      elsif defined?(Sequel)
+        :sequel
+      end
     end
 
     # Configure ORM
