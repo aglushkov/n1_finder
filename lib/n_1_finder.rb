@@ -1,10 +1,7 @@
 # Main class
 class N1Finder
   # Supported ORM adapters
-  ORM_ADAPTERS = {
-    active_record: N1Finder::Adapters::ActiveRecordAdapter,
-    sequel: N1Finder::Adapters::SequelAdapter
-  }.freeze
+  ORM_ADAPTERS = [:active_record, :sequel].freeze
 
   class << self
     # Supported ORM adapters
@@ -78,12 +75,8 @@ class N1Finder
     private
 
     def catch_queries(storage)
-      adapter = adapter_class.new(storage)
+      adapter = Adapters::Factory.get(orm, storage)
       adapter.exec(&Proc.new)
-    end
-
-    def adapter_class
-      ORM_ADAPTERS[orm] || N1Finder::Adapters::NullAdapter
     end
   end
 end
@@ -93,6 +86,7 @@ require 'n_1_finder/middleware'
 require 'n_1_finder/query'
 require 'n_1_finder/n_1_query'
 require 'n_1_finder/storage'
+require 'n_1_finder/adapters/factory'
 require 'n_1_finder/adapters/base_adapter'
 require 'n_1_finder/adapters/active_record_adapter'
 require 'n_1_finder/adapters/sequel_adapter'
