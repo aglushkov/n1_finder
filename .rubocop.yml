@@ -6,3 +6,8 @@ Metrics/MethodLength:
   Max: 12
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
+CaseIndentation:
+  IndentWhenRelativeTo: end
+  IndentOneStep: true
+Lint/EndAlignment:
+  AlignWith: variable
