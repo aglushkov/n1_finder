@@ -75,7 +75,11 @@ class N1Finder
 
     def catch_queries(storage)
       adapter = Adapters::Factory.get(orm, storage)
-      adapter.exec(&Proc.new)
+      mutex.synchronize { adapter.exec(&Proc.new) }
+    end
+
+    def mutex
+      @mutex ||= Mutex.new
     end
   end
 end
